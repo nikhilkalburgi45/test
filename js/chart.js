@@ -1,6 +1,6 @@
 let bloodPressureChart;
 
-export function drawBloodPressureChart(history) {
+function drawBloodPressureChart(history) {
   const labels = history.map((entry) => `${shortMonth(entry.month)}, ${entry.year}`);
   const systolicValues = history.map((entry) => entry.blood_pressure?.systolic?.value ?? null);
   const diastolicValues = history.map((entry) => entry.blood_pressure?.diastolic?.value ?? null);
@@ -97,3 +97,5 @@ export function drawBloodPressureChart(history) {
 function shortMonth(monthName) {
   return monthName.slice(0, 3);
 }
+
+window.drawBloodPressureChart = drawBloodPressureChart;

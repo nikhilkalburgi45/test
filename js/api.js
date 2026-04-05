@@ -1,9 +1,7 @@
-import { API_URL, AUTH_CREDENTIALS } from "./config.js";
+async function fetchPatients() {
+  const encodedCredentials = btoa(window.AppConfig.AUTH_CREDENTIALS);
 
-export async function fetchPatients() {
-  const encodedCredentials = btoa(AUTH_CREDENTIALS);
-
-  const response = await fetch(API_URL, {
+  const response = await fetch(window.AppConfig.API_URL, {
     headers: {
       Authorization: `Basic ${encodedCredentials}`
     }
@@ -15,3 +13,5 @@ export async function fetchPatients() {
 
   return response.json();
 }
+
+window.fetchPatients = fetchPatients;

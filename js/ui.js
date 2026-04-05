@@ -1,17 +1,15 @@
-import { drawBloodPressureChart } from "./chart.js";
-
 const patientListElement = document.getElementById("patientsList");
 const diagnosticListBody = document.getElementById("diagnosticListBody");
 const labResultsList = document.getElementById("labResultsList");
 const patientItemTemplate = document.getElementById("patientItemTemplate");
 
-export function showLoadingState() {
+function showLoadingState() {
   patientListElement.innerHTML = '<div class="loading-state">Loading patient...</div>';
   diagnosticListBody.innerHTML = '<tr><td colspan="3" class="loading-state">Loading diagnostic list...</td></tr>';
   labResultsList.innerHTML = '<div class="loading-state">Loading lab results...</div>';
 }
 
-export function showErrorState(error) {
+function showErrorState(error) {
   const message = error.message || "Something went wrong while loading the dashboard.";
 
   patientListElement.innerHTML = `<div class="error-state">${message}</div>`;
@@ -19,7 +17,7 @@ export function showErrorState(error) {
   labResultsList.innerHTML = `<div class="error-state">${message}</div>`;
 }
 
-export function renderDashboard(patient) {
+function renderDashboard(patient) {
   renderPatientList(patient);
   renderProfile(patient);
   renderDiagnosisHistory(patient.diagnosis_history || []);
@@ -138,18 +136,22 @@ function setStatusText(id, value) {
     return;
   }
 
-  element.textContent = value;
   element.classList.remove("status-up", "status-down", "status-neutral");
 
   const normalizedValue = String(value).toLowerCase();
+  let arrowIcon = "";
 
   if (normalizedValue.includes("higher")) {
     element.classList.add("status-up");
+    arrowIcon = '<img src="assets/ArrowUp.svg" alt="" class="trend-arrow">';
   } else if (normalizedValue.includes("lower")) {
     element.classList.add("status-down");
+    arrowIcon = '<img src="assets/ArrowDown.svg" alt="" class="trend-arrow">';
   } else {
     element.classList.add("status-neutral");
   }
+
+  element.innerHTML = `${arrowIcon}<span>${value}</span>`;
 }
 
 function formatDate(dateString) {
@@ -161,3 +163,7 @@ function formatDate(dateString) {
     year: "numeric"
   });
 }
+
+window.showLoadingState = showLoadingState;
+window.showErrorState = showErrorState;
+window.renderDashboard = renderDashboard;
