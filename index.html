@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar card">
+      <div class="brand">
+        <img src="assets/TestLogo.svg" alt="Tech Care" class="brand-logo">
+      </div>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="#" class="nav-link">
+          <img src="assets/home_FILL0_wght300_GRAD0_opsz24.svg" alt="" class="nav-icon-image">
+          <span>Overview</span>
+        </a>
+        <a href="#" class="nav-link active">
+          <img src="assets/group_FILL0_wght300_GRAD0_opsz24.svg" alt="" class="nav-icon-image">
+          <span>Patients</span>
+        </a>
+        <a href="#" class="nav-link">
+          <img src="assets/calendar_today_FILL0_wght300_GRAD0_opsz24.svg" alt="" class="nav-icon-image">
+          <span>Schedule</span>
+        </a>
+        <a href="#" class="nav-link">
+          <img src="assets/chat_bubble_FILL0_wght300_GRAD0_opsz24.svg" alt="" class="nav-icon-image">
+          <span>Message</span>
+        </a>
+        <a href="#" class="nav-link">
+          <img src="assets/credit_card_FILL0_wght300_GRAD0_opsz24.svg" alt="" class="nav-icon-image">
+          <span>Transactions</span>
+        </a>
+      </nav>
+
+      <div class="doctor-box">
+        <img src="assets/senior-woman-doctor-and-portrait-smile-for-health-2023-11-27-05-18-16-utc.png" alt="Dr. Jose Simmons" class="doctor-avatar">
+        <div class="doctor-copy">
+          <strong>Dr. Jose Simmons</strong>
+          <span>General Practitioner</span>
+        </div>
+        <button class="icon-button" type="button" aria-label="Settings">
+          <img src="assets/settings_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+        </button>
+        <button class="icon-button" type="button" aria-label="More options">
+          <img src="assets/more_vert_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+        </button>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <aside class="card patients-panel">
+        <div class="panel-head">
+          <h2>Patients</h2>
+          <button class="icon-button ghost" type="button" aria-label="Search patients">
+            <img src="assets/search_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+          </button>
+        </div>
+
+        <div class="patients-list" id="patientsList"></div>
+      </aside>
+
+      <section class="main-column">
+        <section class="card diagnosis-card">
+          <div class="section-head">
+            <h2>Diagnosis History</h2>
+          </div>
+
+          <div class="chart-panel">
+            <div class="chart-area">
+              <div class="chart-head">
+                <h3>Blood Pressure</h3>
+                <button class="period-button" type="button">
+                  <span>Last 6 months</span>
+                  <img src="assets/expand_more_FILL0_wght300_GRAD0_opsz24.svg" alt="" class="period-icon">
+                </button>
+              </div>
+              <div class="chart-wrap">
+                <canvas id="bloodPressureChart"></canvas>
+              </div>
+            </div>
+
+            <aside class="reading-summary">
+              <div class="reading-group">
+                <p class="reading-label systolic-dot">Systolic</p>
+                <strong id="systolicValue">--</strong>
+                <span class="trend-text" id="systolicStatus">--</span>
+              </div>
+
+              <div class="reading-group">
+                <p class="reading-label diastolic-dot">Diastolic</p>
+                <strong id="diastolicValue">--</strong>
+                <span class="trend-text" id="diastolicStatus">--</span>
+              </div>
+            </aside>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card stat-blue">
+              <div class="stat-icon" aria-hidden="true">
+                <img src="assets/respiratory rate.svg" alt="" class="metric-image">
+              </div>
+              <p class="stat-title">Respiratory Rate</p>
+              <strong class="stat-value" id="respiratoryRateValue">--</strong>
+              <span class="stat-status" id="respiratoryRateStatus">--</span>
+            </article>
+
+            <article class="stat-card stat-pink">
+              <div class="stat-icon" aria-hidden="true">
+                <img src="assets/temperature.svg" alt="" class="metric-image">
+              </div>
+              <p class="stat-title">Temperature</p>
+              <strong class="stat-value" id="temperatureValue">--</strong>
+              <span class="stat-status" id="temperatureStatus">--</span>
+            </article>
+
+            <article class="stat-card stat-rose">
+              <div class="stat-icon" aria-hidden="true">
+                <img src="assets/HeartBPM.svg" alt="" class="metric-image">
+              </div>
+              <p class="stat-title">Heart Rate</p>
+              <strong class="stat-value" id="heartRateValue">--</strong>
+              <span class="stat-status" id="heartRateStatus">--</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="card diagnostics-card">
+          <div class="section-head">
+            <h2>Diagnostic List</h2>
+          </div>
+
+          <div class="table-wrap">
+            <table class="diagnostics-table">
+              <thead>
+                <tr>
+                  <th>Problem/Diagnosis</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="diagnosticListBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <aside class="right-column">
+        <section class="card profile-card">
+          <div class="profile-top">
+            <img id="profilePicture" src="" alt="Patient profile picture" class="profile-image">
+            <h2 id="patientName">Jessica Taylor</h2>
+          </div>
+
+          <div class="profile-details">
+            <div class="detail-row">
+              <span class="detail-icon"><img src="assets/BirthIcon.svg" alt=""></span>
+              <div>
+                <p>Date Of Birth</p>
+                <strong id="birthDate">--</strong>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-icon"><img src="assets/FemaleIcon.svg" alt=""></span>
+              <div>
+                <p>Gender</p>
+                <strong id="gender">--</strong>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-icon"><img src="assets/PhoneIcon.svg" alt=""></span>
+              <div>
+                <p>Contact Info.</p>
+                <strong id="phoneNumber">--</strong>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-icon"><img src="assets/PhoneIcon.svg" alt=""></span>
+              <div>
+                <p>Emergency Contacts</p>
+                <strong id="emergencyContact">--</strong>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-icon"><img src="assets/InsuranceIcon.svg" alt=""></span>
+              <div>
+                <p>Insurance Provider</p>
+                <strong id="insuranceType">--</strong>
+              </div>
+            </div>
+          </div>
+
+          <button class="primary-button" type="button">Show All Information</button>
+        </section>
+
+        <section class="card labs-card">
+          <div class="section-head">
+            <h2>Lab Results</h2>
+          </div>
+
+          <div class="labs-list" id="labResultsList"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <template id="patientItemTemplate">
+    <article class="patient-item">
+      <img class="patient-item__image" src="" alt="">
+      <div class="patient-item__copy">
+        <strong></strong>
+        <span></span>
+      </div>
+      <button class="icon-button ghost" type="button" aria-label="Patient options">
+        <img src="assets/more_horiz_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+      </button>
+    </article>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
