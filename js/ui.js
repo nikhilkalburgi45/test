@@ -114,7 +114,7 @@ function renderLabResults(items) {
     labRow.className = "lab-item";
     labRow.innerHTML = `
       <span class="lab-name">${item}</span>
-      <img src="assets/download_FILL0_wght300_GRAD0_opsz24 (1).svg" alt="" class="lab-download">
+      <img src="assets/download_icon.svg" alt="" class="lab-download">
     `;
 
     labResultsList.appendChild(labRow);
